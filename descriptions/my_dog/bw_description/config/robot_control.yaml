@@ -1,0 +1,212 @@
+# Controller Manager configuration
+controller_manager:
+  ros__parameters:
+    update_rate: 1000  # Hz 1000
+
+    # Define the available controllers
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    imu_sensor_broadcaster:
+      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
+    ocs2_quadruped_controller:
+      type: ocs2_quadruped_controller/Ocs2QuadrupedController
+
+    rl_quadruped_controller:
+      type: rl_quadruped_controller/LeggedGymController
+
+imu_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: "imu_sensor"
+    frame_id: "imu_link"
+
+ocs2_quadruped_controller:
+  ros__parameters:
+    update_rate: 500  # Hz 500
+    robot_pkg: "bw_description"
+    feet_force_threshold: 20.0
+    default_kd: 6.5
+    joints:
+      - FL_hip_joint
+      - FL_thigh_joint
+      - FL_calf_joint
+      - FR_hip_joint
+      - FR_thigh_joint
+      - FR_calf_joint    
+      - RL_hip_joint
+      - RL_thigh_joint
+      - RL_calf_joint     
+      - RR_hip_joint
+      - RR_thigh_joint
+      - RR_calf_joint  
+     
+    foot_joints: 
+      - FR_foot_joint
+      - FL_foot_joint
+      - RR_foot_joint
+      - RL_foot_joint
+ 
+
+    command_interfaces:
+      - effort
+      - position
+      - velocity
+      - kp
+      - kd
+
+    state_interfaces:
+      - effort
+      - position
+      - velocity
+
+    feet:
+      - FL_foot
+      - FR_foot
+      - RL_foot
+      - RR_foot
+
+    imu_name: "imu_sensor"
+    base_name: "base"
+
+    imu_interfaces:
+      - orientation.w
+      - orientation.x
+      - orientation.y
+      - orientation.z
+      - angular_velocity.x
+      - angular_velocity.y
+      - angular_velocity.z
+      - linear_acceleration.x
+      - linear_acceleration.y
+      - linear_acceleration.z
+
+    foot_force_name: "foot_force"
+    foot_force_interfaces:
+      - FL
+      - FR
+      - RL
+      - RR
+
+rl_quadruped_controller:
+  ros__parameters:
+    update_rate: 200  # Hz
+    robot_pkg: "bw_description"
+#    use_rl_thread: false
+    model_folder: "himloco"
+    rx_scale: 1.0
+    lx_scale: 1.0  # 横向
+    ly_scale: 1.0
+    joints:
+      - FR_hip_joint
+      - FR_thigh_joint
+      - FR_calf_joint
+      - FL_hip_joint
+      - FL_thigh_joint
+      - FL_calf_joint      
+      - RR_hip_joint
+      - RR_thigh_joint
+      - RR_calf_joint       
+      - RL_hip_joint
+      - RL_thigh_joint
+      - RL_calf_joint
+      - FR_foot_joint
+      - FL_foot_joint
+      - RR_foot_joint 
+      - RL_foot_joint    
+
+    stand_pos:
+      - 0.06
+      - 0.72
+      - -1.36000       
+      - -0.06
+      - 0.72
+      - -1.36000       
+      - 0.06
+      - 0.800
+      - -1.40000       
+      - -0.06
+      - 0.800
+      - -1.40000
+      - 0.0000 
+      - 0.0000
+      - 0.0000
+      - 0.0000
+
+    stand_pos1:
+      - 0.075
+      - 0.74
+      - -1.38000       
+      - -0.075
+      - 0.74
+      - -1.38000       
+      - 0.075
+      - 0.840
+      - -1.40000       
+      - -0.075
+      - 0.840
+      - -1.40000
+      - 0.0000 
+      - 0.0000
+      - 0.0000
+      - 0.0000
+
+
+
+    down_pos:
+      - 0.01
+      - 1.27
+      - -2.45       
+      - -0.01
+      - 1.27
+      - -2.45      
+      - 0.0
+      - 1.31
+      - -2.45     
+      - -0.0
+      - 1.31
+      - -2.45
+      - 0.00
+      - 0.00
+      - 0.00
+      - 0.00     
+
+    command_interfaces:
+      - effort
+      - position
+      - velocity
+      - kp
+      - kd
+
+    state_interfaces:
+      - effort
+      - position
+      - velocity
+
+    feet_names:
+      - FR_foot
+      - FL_foot
+      - RR_foot
+      - RL_foot
+
+    foot_force_name: "foot_force"
+    foot_force_interfaces:
+      - FR
+      - FL
+      - RR
+      - RL
+
+    imu_name: "imu_sensor"
+    base_name: "base"
+
+    imu_interfaces:
+      - orientation.w
+      - orientation.x
+      - orientation.y
+      - orientation.z
+      - angular_velocity.x
+      - angular_velocity.y
+      - angular_velocity.z
+      - linear_acceleration.x
+      - linear_acceleration.y
+      - linear_acceleration.z

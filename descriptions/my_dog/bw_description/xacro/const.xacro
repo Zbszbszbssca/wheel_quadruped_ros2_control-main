@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<!-- Constants for robot dimensions -->
+	<xacro:property name="PI" value="3.1415926535897931"/> <!-- 定义圆周率常量，用于角度计算 -->
+	<xacro:property name="stick_mass" value="0.00001"/> <!-- 定义"stick"（可能是辅助结构）的质量，值极小可能用于简化计算 -->
+
+	<!-- simplified collision value -->
+	<!-- 简化的碰撞检测相关尺寸参数 -->
+	<xacro:property name="trunk_width" value="0.225"/> <!-- 躯干宽度：0.0935米 -->
+	<xacro:property name="trunk_length" value="0.3262"/> <!-- 躯干长度：0.3762米 -->
+	<xacro:property name="trunk_height" value="0.125"/> <!-- 躯干高度：0.114米 -->
+	<xacro:property name="hip_radius" value="0.0395"/> <!-- 髋关节碰撞体半径：0.046米 -->
+	<xacro:property name="hip_length" value="0.13"/> <!-- 髋关节碰撞体长度：0.04米 -->
+	<xacro:property name="thigh_shoulder_radius" value="0.041"/> <!-- 大腿肩部碰撞体半径：0.041米 -->
+	<xacro:property name="thigh_shoulder_length" value="0.032"/> <!-- 大腿肩部碰撞体长度：0.032米 -->
+	<xacro:property name="thigh_width" value="0.032"/> <!-- 大腿宽度：0.0245米 -->
+	<xacro:property name="thigh_height" value="0.036"/> <!-- 大腿高度：0.034米 -->
+	<xacro:property name="calf_height" value="0.026"/> <!-- 小腿高度：0.016米 -->
+	<xacro:property name="calf_width" value="0.018"/> <!-- 小腿宽度：0.016米 -->
+	<xacro:property name="foot_height" value="0.035"/> <!-- 轮子宽度：0.016米 -->
+	<xacro:property name="foot_radius" value="0.099"/> <!-- 轮子半径：0.016米 -->
+	<xacro:property name="stick_radius" value="0.01"/> <!-- 辅助结构半径：0.01米 -->
+	<xacro:property name="stick_length" value="0.2"/> <!-- 辅助结构长度：0.2米 -->
+
+	<!-- kinematic value -->
+	<!-- 运动学相关参数（用于计算腿部运动范围和位置） -->
+	<xacro:property name="thigh_length" value="0.16"/> <!-- 大腿长度：0.213米 -->
+	<xacro:property name="calf_length" value="0.175"/> <!-- 小腿长度：0.213米 -->
+
+
+	<!-- offset of link locations (left front) -->
+	<!-- 连杆位置偏移量（以左前腿为基准） -->
+	<xacro:property name="hip_offset_x" value="0.2265"/> <!-- 髋关节在X轴的位置偏移：0.1934米 -->
+	<xacro:property name="hip_offset_y" value="0.055"/> <!-- 髋关节在Y轴的位置偏移：0.0465米 -->
+	<xacro:property name="hip_offset_z" value="-0.015"/> <!-- 髋关节在Z轴的位置偏移：0米（无偏移） -->
+
+
+	<xacro:property name="thigh_offset_x" value="0"/> <!-- 大腿在X轴的位置偏移：0米 -->
+	<xacro:property name="thigh_collision_offset_y" value="0.044"/> <!-- 大腿在Y轴的位置偏移：0.0955米 -->
+	<xacro:property name="thigh_offset_y" value="0.1025"/> <!-- 大腿在Y轴的位置偏移：0.0955米 -->
+	<xacro:property name="thigh_offset_z" value="0.0"/> <!-- 大腿在Z轴的位置偏移：0米 -->
+
+
+	<xacro:property name="calf_offset_x" value="0.0"/> <!-- 小腿在X轴的位置偏移：0米 -->
+	<xacro:property name="calf_offset_y" value="-0.004"/> <!-- 小腿在Y轴的位置偏移：0米 -->
+	<xacro:property name="calf_offset_z" value="-0.16"/> <!-- 小腿在Z轴的位置偏移：-0.213米（向下方向） -->
+
+    <xacro:property name="foot_offset_x" value="0.0"/> <!-- 小腿在X轴的位置偏移：0米 -->
+	<xacro:property name="foot_offset_y" value="0.061"/> <!-- 小腿在Y轴的位置偏移：0米 -->
+	<xacro:property name="foot_collision_offset_y" value="-0.010000000000000002"/> <!-- 小腿在Y轴的位置偏移：0米 -->	
+	<xacro:property name="foot_offset_z" value="-0.18"/> <!-- 小腿在Z轴的位置偏移：-0.213米（向下方向） -->
+
+
+	<!-- joint limits -->
+	<!-- 关节运动限制参数 -->
+	<xacro:property name="damping" value="0.1"/> <!-- 关节阻尼系数：0.1（影响关节运动的平滑度） -->
+	<xacro:property name="friction" value="0.2"/> <!-- 关节摩擦系数：0.2（模拟关节摩擦阻力） -->
+	<xacro:property name="hip_position_max" value="1.0472"/> <!-- 髋关节最大位置（角度）：约60度（1.0472弧度） -->
+	<xacro:property name="hip_position_min" value="-1.0472"/> <!-- 髋关节最小位置（角度）：约-60度（-1.0472弧度） -->
+	<xacro:property name="hip_velocity_max" value="20.1"/> <!-- 髋关节最大速度：30.1弧度/秒 -->
+	<xacro:property name="hip_torque_max" value="17.0"/> <!-- 髋关节最大扭矩 -->
+	<xacro:property name="thigh_position_max_qian" value="3.4907"/> <!-- 前大腿关节最大位置：约200度（3.4907弧度） -->
+	<xacro:property name="thigh_position_min_qian" value="-1.5708"/> <!-- 前大腿关节最小位置：约-90度（-1.5708弧度） -->
+	<xacro:property name="thigh_position_max_hou" value="4.5379"/>  <!-- 约260度 -->
+	<xacro:property name="thigh_position_min_hou" value="-0.5236"/> <!-- 约-30度 -->
+	<xacro:property name="thigh_velocity_max" value="20.1"/>  <!-- 大腿关节最大速度：30.1弧度/秒 -->
+	<xacro:property name="thigh_torque_max" value="17.0"/>  <!-- 大腿关节最大扭矩 -->
+	<xacro:property name="calf_position_max" value="-0.88"/> <!-- 小腿关节最大位置：约-48度（-0.83776弧度） -->
+	<xacro:property name="calf_position_min" value="-2.68"/> <!-- 小腿关节最小位置：约-156度（-2.7227弧度） -->
+	<xacro:property name="calf_velocity_max" value="12.07"/> <!-- 小腿关节最大速度-->
+	<xacro:property name="calf_torque_max" value="34.0"/> <!-- 小腿关节最大扭矩：34牛·米 -->
+	<xacro:property name="foot_velocity_max" value="18.1"/> <!-- 足端轮毂电机最大速度：30.1弧度/秒 -->
+	<xacro:property name="foot_torque_max" value="12.0"/> <!-- 足端轮毂电机最大扭矩 -->
+
+	<!-- dynamics inertial value -->
+	<!-- 动力学惯性参数（影响机器人运动仿真的物理特性） -->
+	<!-- trunk -->
+	<!-- 躯干参数 -->
+	<!-- 躯干参数 -->
+	<xacro:property name="trunk_mass" value="4.7"/> <!-- 躯干质量：4.9千克（原6.921千克） -->
+	<xacro:property name="trunk_com_x" value="0.00027676"/> <!-- 躯干质心（COM）在X轴的位置：0.021112米 -->
+	<xacro:property name="trunk_com_y" value="-0.0088849"/> <!-- 躯干质心在Y轴的位置：0米（中心对称） -->
+	<xacro:property name="trunk_com_z" value="-0.013996"/> <!-- 躯干质心在Z轴的位置：-0.005366米（略向下） -->
+	<xacro:property name="trunk_ixx" value="0.02140817"/> <!-- 躯干绕X轴的转动惯量：0.01733 kg·m²（原0.02448） -->
+	<xacro:property name="trunk_ixy" value="0.00001236"/> <!-- 躯干绕X-Y轴的惯性积：0.0000861 kg·m²（原0.00012166） -->
+	<xacro:property name="trunk_ixz" value="0.00000148"/> <!-- 躯干绕X-Z轴的惯性积：0.0010513 kg·m²（原0.0014849） -->
+	<xacro:property name="trunk_iyy" value="0.06703007"/> <!-- 躯干绕Y轴的转动惯量：0.06944 kg·m²（原0.098077） -->
+	<xacro:property name="trunk_iyz" value="0.00005692"/> <!-- 躯干绕Y-Z轴的惯性积：-2.209E-05 kg·m²（原-3.12E-05） -->
+	<xacro:property name="trunk_izz" value="0.07949588"/> <!-- 躯干绕Z轴的转动惯量：0.07576 kg·m²（原0.107） -->
+
+
+	<!-- hip (left front) -->
+	<!-- 髋关节参数（以左前腿为基准） -->
+	<xacro:property name="hip_mass" value="0.5966"/> <!-- 髋关节质量：0.5千克 -->
+	<xacro:property name="hip_com_x" value="-0.0041211"/> <!-- 髋关节质心在X轴的位置：-0.0054米 -->
+	<xacro:property name="hip_com_y" value="0.0051556"/> <!-- 髋关节质心在Y轴的位置：0.00194米 -->
+	<xacro:property name="hip_com_z" value="0.00012878"/> <!-- 髋关节质心在Z轴的位置：-0.000105米 -->
+	<xacro:property name="hip_ixx" value="0.00047082"/> <!-- 髋关节绕X轴的转动惯量：0.000354 kg·m² -->
+	<xacro:property name="hip_ixy" value="-0.00001656"/> <!-- 髋关节绕X-Y轴的惯性积：-2.22E-06 kg·m² -->
+	<xacro:property name="hip_ixz" value="-0.00000158"/> <!-- 髋关节绕X-Z轴的惯性积：8.19E-07 kg·m² -->
+	<xacro:property name="hip_iyy" value="0.00055549"/> <!-- 髋关节绕Y轴的转动惯量：0.000652 kg·m² -->
+	<xacro:property name="hip_iyz" value="0.00000172"/> <!-- 髋关节绕Y-Z轴的惯性积：-1.05E-06 kg·m² -->
+	<xacro:property name="hip_izz" value="0.00058369"/> <!-- 髋关节绕Z轴的转动惯量：0.000440 kg·m² -->
+
+	<!-- thigh -->
+	<!-- 大腿参数 -->
+	<xacro:property name="thigh_mass" value="0.789"/> <!-- 大腿质量：0.8千克 -->
+	<xacro:property name="thigh_com_x" value="-0.0019016"/> <!-- 大腿质心在X轴的位置：-0.00374米 -->
+	<xacro:property name="thigh_com_y" value="-0.018616"/> <!-- 大腿质心在Y轴的位置：-0.0223米 -->
+	<xacro:property name="thigh_com_z" value="-0.030116"/> <!-- 大腿质心在Z轴的位置：-0.0327米 -->
+	<xacro:property name="thigh_ixx" value="0.00402201"/> <!-- 大腿绕X轴的转动惯量：0.00410 kg·m² -->
+	<xacro:property name="thigh_ixy" value="2.047E-05"/> <!-- 大腿绕X-Y轴的惯性积：6.12E-05 kg·m² -->
+	<xacro:property name="thigh_ixz" value="-1.747E-05"/> <!-- 大腿绕X-Z轴的惯性积：-0.000203 kg·m² -->
+	<xacro:property name="thigh_iyy" value="0.00396574"/> <!-- 大腿绕Y轴的转动惯量：0.00407 kg·m² -->
+	<xacro:property name="thigh_iyz" value="0.0006155"/> <!-- 大腿绕Y-Z轴的惯性积：0.000567 kg·m² -->
+	<xacro:property name="thigh_izz" value="0.00054933"/> <!-- 大腿绕Z轴的转动惯量：0.000722 kg·m² -->
+
+	<!-- calf -->
+	<!-- 小腿参数 -->
+	<xacro:property name="calf_mass" value="0.377"/> <!-- 小腿质量：0.154千克 -->
+	<xacro:property name="calf_com_x" value="-0.000765487060335857"/> <!-- 小腿质心在X轴的位置：0.00548米 -->
+	<xacro:property name="calf_com_y" value="0.0183577890363815"/> <!-- 小腿质心在Y轴的位置：-0.000975米 -->
+	<xacro:property name="calf_com_z" value="-0.154926754684192"/> <!-- 小腿质心在Z轴的位置：-0.0921米（长度缩放后） -->
+	<xacro:property name="calf_ixx" value="0.00098633"/> <!-- 小腿绕X轴的转动惯量：0.0010395 kg·m² (原0.000693×1.5) -->
+	<xacro:property name="calf_ixy" value="-0.00000402"/> <!-- 小腿绕X-Y轴的惯性积：3.27E-07 kg·m² (原2.18E-07×1.5) -->
+	<xacro:property name="calf_ixz" value="0.00001053"/> <!-- 小腿绕X-Z轴的惯性积：1.65E-05 kg·m² (原1.10E-05×1.5) -->
+	<xacro:property name="calf_iyy" value="0.00097543"/> <!-- 小腿绕Y轴的转动惯量：0.001059 kg·m² (原0.000706×1.5) -->
+	<xacro:property name="calf_iyz" value="0.00013167"/> <!-- 小腿绕Y-Z轴的惯性积：7.965E-06 kg·m² (原5.31E-06×1.5) -->
+	<xacro:property name="calf_izz" value="0.00017669"/> <!-- 小腿绕Z轴的转动惯量：3.165E-05 kg·m² (原2.11E-05×1.5) -->
+
+
+
+
+
+	<!-- foot -->
+	<!-- 足部参数 -->
+	<xacro:property name="foot_mass" value="0.6959"/> <!-- 足部质量 -->
+	<xacro:property name="foot_com_x" value="3.61016876218034E-05"/> <!-- 小腿质心在X轴的位置： -->
+	<xacro:property name="foot_com_y" value="-0.0115832620181727"/> <!-- 小腿质心在Y轴的位置： -->
+	<xacro:property name="foot_com_z" value="-8.02701045317655E-05"/> <!-- 小腿质心在Z轴的位置：（长度缩放后） -->
+	<xacro:property name="foot_ixx" value="0.00216437"/> <!-- 小腿绕X轴的转动惯量：  -->
+	<xacro:property name="foot_ixy" value="0.00000023"/> <!-- 小腿绕X-Y轴的惯性积：  -->
+	<xacro:property name="foot_ixz" value="0.00000129"/> <!-- 小腿绕X-Z轴的惯性积： -->
+	<xacro:property name="foot_iyy" value="0.00415580"/> <!-- 小腿绕Y轴的转动惯量： -->
+	<xacro:property name="foot_iyz" value="-0.00000010"/> <!-- 小腿绕Y-Z轴的惯性积： -->
+	<xacro:property name="foot_izz" value="0.00216126"/> <!-- 小腿绕Z轴的转动惯量： -->
+
+	
+	
+
+	
+	
+</robot>

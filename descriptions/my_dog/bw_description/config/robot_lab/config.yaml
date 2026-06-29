@@ -1,0 +1,49 @@
+model_name: "policy12.pt"
+framework: "isaacsim"
+decimation: 4
+num_observations: 57
+observations: [ "ang_vel", "gravity_vec", "commands", "dof_pos", "dof_vel", "actions" ]
+observations_history: []  # 0 is the latest observation
+clip_obs: 100.0
+clip_actions_lower: [ -100.0, -100.0, -100.0,
+                      -100.0, -100.0, -100.0,
+                      -100.0, -100.0, -100.0,
+                      -100.0, -100.0, -100.0,
+                      -100.0, -100.0, -100.0, -100.0]
+clip_actions_upper: [ 100.0, 100.0, 100.0,
+                      100.0, 100.0, 100.0,
+                      100.0, 100.0, 100.0,
+                      100.0, 100.0, 100.0,
+                      100.0, 100.0, 100.0, 100.0]
+rl_kp: [ 25.0, 25.0, 25.2,
+         25.0, 25.0, 25.2,
+         25.0, 25.0, 25.2,
+         25.0, 25.0, 25.2,
+        0.0, 0.0, 0.0, 0.0]
+rl_kd: [ 0.4, 0.4, 0.42,
+         0.4, 0.4, 0.42,
+         0.4, 0.4, 0.42,
+         0.4, 0.4, 0.42,
+         0.4, 0.4, 0.4, 0.4]  # TODO
+model_to_real: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+wheel_indices: [12, 13, 14, 15]  # 关节是轮子（索引从0开始）         
+hip_scale_reduction: 1.0
+hip_scale_reduction_indices: [ 0, 3, 6, 9 ]
+num_of_dofs: 16
+action_scale: [0.125, 0.25, 0.25,
+                0.125, 0.25, 0.25,
+                0.125, 0.25, 0.25,
+                0.125, 0.25, 0.25,
+                5.0, 5.0, 5.0, 5.0]
+
+lin_vel_scale: 2.0
+ang_vel_scale: 0.25
+dof_pos_scale: 1.0
+dof_vel_scale: 0.05
+commands_scale: [ 1.0, 1.0, 1.0 ]
+
+torque_limits: [ 18.0, 18.0, 35.0,
+                 18.0, 18.0, 35.0,
+                 18.0, 18.0, 35.0,
+                 18.0, 18.0, 35.0,
+                5.0, 5.0, 5.0, 5.0]
