@@ -5,13 +5,13 @@ This repository contains a simplified ros2-control based stack for Unitree quadr
 * [Controllers](controllers): OCS2 and RL ros2-control controllers
 * [Commands](commands): joystick command input and shared input message
 * [Descriptions](descriptions): Unitree URDF/Xacro robot models and controller configs
-* [Hardwares](hardwares): Gazebo and Unitree SDK2 ros2-control hardware interfaces
+* [Hardwares](hardwares): Unitree SDK2 ros2-control hardware interface
 
 > **Warning:** Default branch was developed under ROS2 Jazzy. For ROS2 Humble, please check out **humble** branch.
 
 ## Simplified scope
 
-This local copy was pruned on 2026-06-25. It keeps the standard ROS joystick input path, OCS2/RL controllers, and Unitree robot descriptions. Removed package groups and rollback instructions are recorded in [SIMPLIFICATION_CHANGES.md](SIMPLIFICATION_CHANGES.md).
+This local copy was pruned on 2026-06-25. It keeps the standard ROS joystick input path, OCS2/RL controllers, Unitree SDK2 hardware interface, and Unitree robot descriptions. Gazebo/GZ simulation support has been removed; use the Unitree Mujoco simulator or real Unitree SDK2 transport instead. Removed package groups and rollback instructions are recorded in [SIMPLIFICATION_CHANGES.md](SIMPLIFICATION_CHANGES.md).
 
 ## 1. Quick Start
 
@@ -21,10 +21,10 @@ This local copy was pruned on 2026-06-25. It keeps the standard ROS joystick inp
   rosdep install --from-paths src --ignore-src -r -y
   ```
 
-* Build the common Gazebo/OCS2/RL stack
+* Build the common OCS2/RL stack
   ```bash
   cd ~/ros2_ws
-  colcon build --packages-up-to joystick_input gz_quadruped_playground ocs2_quadruped_controller rl_quadruped_controller bw_description --symlink-install
+  colcon build --packages-up-to joystick_input ocs2_quadruped_controller rl_quadruped_controller bw_description --symlink-install
   ```
 
 ### 1.1 Joystick input
@@ -58,31 +58,29 @@ The node publishes `control_input_msgs/msg/Inputs` on `/control_input`.
 
 ![mujoco](.images/mujoco.png)
 
-### 1.3 Gazebo Harmonic Simulator
+## Demos
 
-* Install Gazebo bridge packages
-  ```bash
-  sudo apt-get install ros-jazzy-ros-gz
-  ```
+### Terrain estimation
 
-* Compile Gazebo playground
-  ```bash
-  colcon build --packages-up-to gz_quadruped_playground --symlink-install
-  ```
-* Launch OCS2 in Gazebo playground
-  ```bash
-  source ~/ros2_ws/install/setup.bash
-  ros2 launch gz_quadruped_playground gazebo.launch.py pkg_description:=bw_description
-  ```
-* Start joystick input in another terminal
-  ```bash
-  source ~/ros2_ws/install/setup.bash
-  ros2 launch joystick_input joystick.launch.py
-  ```
+![Terrain estimation](image/1.gif)
 
-![gazebo](.images/gazebo.png)
+### Online gait
+
+![Online gait](image/2.gif)
+
+### Online gait
+
+![Online gait](image/3.gif)
 
 For more details, see [OCS2 Quadruped Controller](controllers/ocs2_quadruped_controller/), [RL Quadruped Controller](controllers/rl_quadruped_controller/), and [BW robot description](descriptions/my_dog/bw_description/).
+
+## Attribution and Copyright Notice
+
+This repository is a modified fork based on [legubiao/quadruped_ros2_control](https://github.com/legubiao/quadruped_ros2_control). Original copyrights, license terms, authorship notices, and third-party dependency notices belong to their respective owners and should be retained when redistributing this fork.
+
+This fork contains project-specific modifications, including the custom BW robot description, controller configuration updates, Unitree Mujoco / SDK2 workflow updates, README cleanup, and removal of Gazebo/GZ simulation support.
+
+The controller and gait-generation work in this repository also refers to the paper *Whole-Body MPC and Online Gait Sequence Generation for Wheeled-Legged Robots*. The paper and its figures, text, and associated intellectual property belong to their original authors/publisher; this repository only references the paper as related academic background.
 
 ## What's Next
 
@@ -90,8 +88,6 @@ For more details, see [OCS2 Quadruped Controller](controllers/ocs2_quadruped_con
 * **Try kept controllers**
   * [OCS2 Quadruped Controller](controllers/ocs2_quadruped_controller): MPC-based controller for quadruped robots
   * [RL Quadruped Controller](controllers/rl_quadruped_controller): reinforcement-learning controller for quadruped robots
-* **Simulate with more sensors**
-  * [Gazebo Quadruped Playground](libraries/gz_quadruped_playground): Gazebo simulation with lidar/depth camera support
 * **Real Robot Deploy**
   * [BW Robot](descriptions/my_dog/bw_description): deployment notes for the custom robot description
 

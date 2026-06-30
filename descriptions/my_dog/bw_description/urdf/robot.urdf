@@ -51,8 +51,8 @@
       <param name="network_interface">lo</param>
       <param name="show_foot_force">true</param>
       <!-- UDP-only：不启动 DDS -->
-      <param name="enable_dds">false</param>
-      <param name="enable_udp">true</param>
+      <param name="enable_dds">true</param>
+      <param name="enable_udp">false</param>
       <!-- 本机验证：LowCmd 发到 127.0.0.1:9000；LowState 从本机 9001 收 -->
       <param name="udp_remote_ip">192.168.10.55</param>
       <param name="udp_remote_port">1978</param>
@@ -272,7 +272,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/base.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/base.stl" scale="1 1 1"/>
       </geometry>
       <!-- <material name="orange"/> -->
     </visual>
@@ -326,7 +326,7 @@
     <visual>
       <origin rpy="3.141592653589793 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/hip.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/hip.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -355,7 +355,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/thigh_mirror.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/thigh_mirror.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -383,7 +383,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/calf_mirror.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/calf_mirror.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -398,23 +398,6 @@
       <inertia ixx="0.00098633" ixy="4.02e-06" ixz="1.053e-05" iyy="0.00097543" iyz="-0.00013167" izz="0.00017669"/>
     </inertial>
   </link>
-  <!-- 核心关节的gazebo配置 -->
-  <gazebo reference="FR_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  <gazebo reference="FR_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>0</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
-  <gazebo reference="FR_calf">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-  </gazebo>
   <transmission name="FR_hip_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="FR_hip_joint">
@@ -458,7 +441,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/hip.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/hip.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -487,7 +470,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/thigh.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/thigh.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -515,7 +498,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/calf.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/calf.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -530,23 +513,6 @@
       <inertia ixx="0.00098633" ixy="-4.02e-06" ixz="1.053e-05" iyy="0.00097543" iyz="0.00013167" izz="0.00017669"/>
     </inertial>
   </link>
-  <!-- 核心关节的gazebo配置 -->
-  <gazebo reference="FL_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  <gazebo reference="FL_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>0</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
-  <gazebo reference="FL_calf">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-  </gazebo>
   <transmission name="FL_hip_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="FL_hip_joint">
@@ -590,7 +556,7 @@
     <visual>
       <origin rpy="3.141592653589793 3.141592653589793 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/hip.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/hip.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -619,7 +585,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/thigh_mirror.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/thigh_mirror.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -647,7 +613,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/calf_mirror.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/calf_mirror.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -662,23 +628,6 @@
       <inertia ixx="0.00098633" ixy="-4.02e-06" ixz="-1.053e-05" iyy="0.00097543" iyz="-0.00013167" izz="0.00017669"/>
     </inertial>
   </link>
-  <!-- 核心关节的gazebo配置 -->
-  <gazebo reference="RR_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  <gazebo reference="RR_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>0</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
-  <gazebo reference="RR_calf">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-  </gazebo>
   <transmission name="RR_hip_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="RR_hip_joint">
@@ -722,7 +671,7 @@
     <visual>
       <origin rpy="0 3.141592653589793 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/hip.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/hip.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -751,7 +700,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/thigh.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/thigh.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -779,7 +728,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/calf.stl" scale="1 1 1"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/calf.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -794,23 +743,6 @@
       <inertia ixx="0.00098633" ixy="4.02e-06" ixz="-1.053e-05" iyy="0.00097543" iyz="0.00013167" izz="0.00017669"/>
     </inertial>
   </link>
-  <!-- 核心关节的gazebo配置 -->
-  <gazebo reference="RL_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  <gazebo reference="RL_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>0</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
-  <gazebo reference="RL_calf">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-  </gazebo>
   <transmission name="RL_hip_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="RL_hip_joint">
@@ -855,7 +787,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/wheel_mirror.stl"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/wheel_mirror.stl"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -873,14 +805,6 @@
       <inertia ixx="0.00216437" ixy="-2.3e-07" ixz="1.29e-06" iyy="0.0041558" iyz="1e-07" izz="0.00216126"/>
     </inertial>
   </link>
-  <!-- 足部关节的gazebo配置 -->
-  <gazebo reference="FR_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
   <transmission name="FR_foot_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="FR_foot_joint">
@@ -905,7 +829,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/wheel.stl"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/wheel.stl"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -923,14 +847,6 @@
       <inertia ixx="0.00216437" ixy="2.3e-07" ixz="1.29e-06" iyy="0.0041558" iyz="-1e-07" izz="0.00216126"/>
     </inertial>
   </link>
-  <!-- 足部关节的gazebo配置 -->
-  <gazebo reference="FL_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
   <transmission name="FL_foot_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="FL_foot_joint">
@@ -955,7 +871,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/wheel_mirror.stl"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/wheel_mirror.stl"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -973,14 +889,6 @@
       <inertia ixx="0.00216437" ixy="2.3e-07" ixz="-1.29e-06" iyy="0.0041558" iyz="1e-07" izz="0.00216126"/>
     </inertial>
   </link>
-  <!-- 足部关节的gazebo配置 -->
-  <gazebo reference="RR_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
   <transmission name="RR_foot_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="RR_foot_joint">
@@ -1005,7 +913,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://bw_description/meshes/wheel.stl"/>
+        <mesh filename="file:///home/zbs/Desktop/ros2_q/install/bw_description/share/bw_description/meshes/wheel.stl"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -1023,14 +931,6 @@
       <inertia ixx="0.00216437" ixy="-2.3e-07" ixz="-1.29e-06" iyy="0.0041558" iyz="-1e-07" izz="0.00216126"/>
     </inertial>
   </link>
-  <!-- 足部关节的gazebo配置 -->
-  <gazebo reference="RL_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="100.0"/>
-  </gazebo>
   <transmission name="RL_foot_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="RL_foot_joint">

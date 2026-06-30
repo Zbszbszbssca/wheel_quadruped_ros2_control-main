@@ -45,10 +45,3 @@ colcon build --packages-up-to rl_quadruped_controller --symlink-install
 source ~/ros2_ws/install/setup.bash
 ros2 launch rl_quadruped_controller mujoco.launch.py pkg_description:=bw_description
 ```
-
-### 3.2 Gazebo Harmonic
-
-```bash
-source ~/ros2_ws/install/setup.bash
-ros2 launch rl_quadruped_controller gazebo.launch.py pkg_description:=bw_description
-```

@@ -150,26 +150,6 @@
       </inertial>
     </link>
 
-    <!-- 核心关节的gazebo配置 -->
-    <gazebo reference="${name}_hip">
-      <mu1>0.2</mu1>
-      <mu2>0.2</mu2>
-    </gazebo>
-
-    <gazebo reference="${name}_thigh">
-      <mu1>0.2</mu1>
-      <mu2>0.2</mu2>
-      <self_collide>0</self_collide>
-      <kp value="1000000.0"/>
-      <kd value="100.0"/>
-    </gazebo>
-
-    <gazebo reference="${name}_calf">
-      <mu1>0.6</mu1>
-      <mu2>0.6</mu2>
-      <self_collide>1</self_collide>
-    </gazebo>
-
     <!-- 核心关节的传动配置 -->
     <xacro:leg_core_transmission name="${name}"/>
   </xacro:macro>
@@ -217,15 +197,6 @@
             izz="${foot_izz}"/>
       </inertial>
     </link>
-
-    <!-- 足部关节的gazebo配置 -->
-    <gazebo reference="${name}_foot">
-      <mu1>0.6</mu1>
-      <mu2>0.6</mu2>
-      <self_collide>1</self_collide>
-      <kp value="1000000.0"/>
-      <kd value="100.0"/>
-    </gazebo>
 
     <!-- 足部关节的传动配置 -->
     <xacro:leg_foot_transmission name="${name}"/>

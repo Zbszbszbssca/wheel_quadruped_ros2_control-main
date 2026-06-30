@@ -18,18 +18,3 @@ This folder contains the URDF/Xacro files and controller configs for quadruped r
   ```bash
   compile robot.urdf robot.xml
   ```
-
-## 2. Dependencies for Gazebo Simulation
-
-Gazebo Harmonic simulation is tested on ROS2 Jazzy.
-
-* Gazebo Harmonic
-  ```bash
-  sudo apt-get install ros-jazzy-ros-gz
-  ```
-* ros2-control for Gazebo
-  ```bash
-  sudo apt-get install ros-jazzy-gz-ros2-control
-  ```
-
-The simplified tree uses the kept Gazebo hardware interface and OCS2/RL controllers.

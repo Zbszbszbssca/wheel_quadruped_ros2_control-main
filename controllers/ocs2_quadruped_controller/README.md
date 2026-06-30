@@ -73,12 +73,12 @@ OCS2 Quadruped controller depends on the OCS2 library, it required c++ automatic
 
 You may see something similar to:
 ```
-[gazebo-5] [CppAdInterface] Compiling Shared Library: /home/biao/ocs2_cpp_ad/b2/RR_foot_position/cppad_generated/RR_foot_position_libcppadcg_tmp-27918274.so
-[gazebo-5] [CppAdInterface] Renaming /home/biao/ocs2_cpp_ad/b2/RR_foot_position/cppad_generated/RR_foot_position_libcppadcg_tmp-27918274.so to /home/biao/ocs2_cpp_ad/b2/RR_foot_position/cppad_generated/RR_foot_position_lib.so
-[gazebo-5] [CppAdInterface] Compiling Shared Library: /home/biao/ocs2_cpp_ad/b2/RR_foot_velocity/cppad_generated/RR_foot_velocity_libcppadcg_tmp-94918274.so
-[gazebo-5] [CppAdInterface] Renaming /home/biao/ocs2_cpp_ad/b2/RR_foot_velocity/cppad_generated/RR_foot_velocity_libcppadcg_tmp-94918274.so to /home/biao/ocs2_cpp_ad/b2/RR_foot_velocity/cppad_generated/RR_foot_velocity_lib.so
-[gazebo-5] [CppAdInterface] Compiling Shared Library: /home/biao/ocs2_cpp_ad/b2/RR_foot_orientation/cppad_generated/RR_foot_orientation_libcppadcg_tmp-83618274.so
-[gazebo-5] [CppAdInterface] Renaming /home/biao/ocs2_cpp_ad/b2/RR_foot_orientation/cppad_generated/RR_foot_orientation_libcppadcg_tmp-83618274.so to /home/biao/ocs2_cpp_ad/b2/RR_foot_orientation/cppad_generated/RR_foot_orientation_lib.so
+[controller_manager] [CppAdInterface] Compiling Shared Library: /home/biao/ocs2_cpp_ad/b2/RR_foot_position/cppad_generated/RR_foot_position_libcppadcg_tmp-27918274.so
+[controller_manager] [CppAdInterface] Renaming /home/biao/ocs2_cpp_ad/b2/RR_foot_position/cppad_generated/RR_foot_position_libcppadcg_tmp-27918274.so to /home/biao/ocs2_cpp_ad/b2/RR_foot_position/cppad_generated/RR_foot_position_lib.so
+[controller_manager] [CppAdInterface] Compiling Shared Library: /home/biao/ocs2_cpp_ad/b2/RR_foot_velocity/cppad_generated/RR_foot_velocity_libcppadcg_tmp-94918274.so
+[controller_manager] [CppAdInterface] Renaming /home/biao/ocs2_cpp_ad/b2/RR_foot_velocity/cppad_generated/RR_foot_velocity_libcppadcg_tmp-94918274.so to /home/biao/ocs2_cpp_ad/b2/RR_foot_velocity/cppad_generated/RR_foot_velocity_lib.so
+[controller_manager] [CppAdInterface] Compiling Shared Library: /home/biao/ocs2_cpp_ad/b2/RR_foot_orientation/cppad_generated/RR_foot_orientation_libcppadcg_tmp-83618274.so
+[controller_manager] [CppAdInterface] Renaming /home/biao/ocs2_cpp_ad/b2/RR_foot_orientation/cppad_generated/RR_foot_orientation_libcppadcg_tmp-83618274.so to /home/biao/ocs2_cpp_ad/b2/RR_foot_orientation/cppad_generated/RR_foot_orientation_lib.so
 ```
 The compilation process may take a few minutes. After the compilation, restart the controller and the robot should stand up.
 
@@ -99,10 +99,4 @@ The controller listens to `/control_input`. With the kept joystick input path, c
 ```bash
 source ~/ros2_ws/install/setup.bash
 ros2 launch ocs2_quadruped_controller mujoco.launch.py pkg_description:=bw_description
-```
-
-#### Gazebo Launch
-```bash
-source ~/ros2_ws/install/setup.bash
-ros2 launch ocs2_quadruped_controller gazebo.launch.py pkg_description:=bw_description
 ```

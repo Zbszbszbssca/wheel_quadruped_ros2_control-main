@@ -1,34 +1,58 @@
 # Joystick Input
 
-This node will listen to the joystick topic and publish a control_input_msgs/Input message.
+This package converts `sensor_msgs/msg/Joy` from the standard ROS `joy` node into `control_input_msgs/msg/Inputs` on `/control_input`.
 
 Tested environment:
+
 * Ubuntu 24.04
   * ROS2 Jazzy
   * Logitech F310 Gamepad
 
+## Build
+
 ```bash
 cd ~/ros2_ws
-colcon build --packages-up-to joystick_input
+colcon build --packages-up-to joystick_input --symlink-install
 ```
+
+## Launch
 
 ```bash
 source ~/ros2_ws/install/setup.bash
 ros2 launch joystick_input joystick.launch.py
 ```
 
-## 1. Use Instructions for Unitree Guide
+The launch file starts:
 
-### 1.1 Control Mode
+* `joy/joy_node`, reading `/dev/input/js0`
+* `joystick_input`, publishing `/control_input`
 
-* Passive Mode: LB + B
-* Fixed Stand: LB + A
-    * Free Stand: LB + X
-    * Trot: LB + Y
-    * SwingTest: LT + B
-    * Balance: LT + A
+## Input mapping
 
-### 1.2 Control Input
+The node has two input modes selected by axis 7.
 
-* WASD IJKL: Move robot
-* Space: Reset Speed Input
+### Velocity input mode
+
+When axis 7 is not `1`, the node publishes velocity-style inputs:
+
+* `lx = -axes[0]`
+* `ly = axes[1]`
+* `rx = -axes[3]`
+* `ry = axes[2]`
+* `command = 0`
+
+### Command selection mode
+
+When axis 7 is `1`, the node clears `lx`, `ly`, `rx`, and `ry`, then selects `command` from axes 4, 5, and 6:
+
+| axes[4] | axes[5] | axes[6] | command |
+| --- | --- | --- | --- |
+| -1 | -1 | -1 | 1 |
+| 0 | -1 | -1 | 2 |
+| 1 | -1 | -1 | 3 |
+| -1 | 0 | -1 | 4 |
+| 0 | 0 | -1 | 5 |
+| 1 | 0 | -1 | 6 |
+| -1 | 1 | -1 | 7 |
+| 0 | 1 | -1 | 8 |
+| -1 | -1 | 0 | 9 |

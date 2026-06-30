@@ -35,19 +35,6 @@ For real robots using the SDK2 hardware interface, configure `xacro/ros2_control
   ros2 launch rl_quadruped_controller mujoco.launch.py pkg_description:=bw_description
   ```
 
-### Gazebo Harmonic
-
-* OCS2 Quadruped Controller
-  ```bash
-  source ~/ros2_ws/install/setup.bash
-  ros2 launch ocs2_quadruped_controller gazebo.launch.py pkg_description:=bw_description height:=0.5
-  ```
-* RL Quadruped Controller
-  ```bash
-  source ~/ros2_ws/install/setup.bash
-  ros2 launch bw_description gazebo_rl_control.launch.py
-  ```
-
 ### Joystick command input
 
 Start the kept joystick input path in another terminal:
