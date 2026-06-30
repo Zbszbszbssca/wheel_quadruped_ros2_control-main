@@ -1,5 +1,23 @@
 # Quadruped ROS2 Control
 
+## Demos
+
+### High mobility
+
+![High mobility](image/0.gif)
+
+### Terrain estimation
+
+![Terrain estimation](image/1.gif)
+
+### Online gait
+
+![Online gait](image/2.gif)
+
+### Online gait
+
+![Online gait](image/3.gif)
+
 This repository contains a simplified ros2-control based stack for Unitree quadruped robots.
 
 * [Controllers](controllers): OCS2 and RL ros2-control controllers
@@ -8,10 +26,6 @@ This repository contains a simplified ros2-control based stack for Unitree quadr
 * [Hardwares](hardwares): Unitree SDK2 ros2-control hardware interface
 
 > **Warning:** Default branch was developed under ROS2 Jazzy. For ROS2 Humble, please check out **humble** branch.
-
-## Simplified scope
-
-This local copy was pruned on 2026-06-25. It keeps the standard ROS joystick input path, OCS2/RL controllers, Unitree SDK2 hardware interface, and Unitree robot descriptions. Gazebo/GZ simulation support has been removed; use the Unitree Mujoco simulator or real Unitree SDK2 transport instead. Removed package groups and rollback instructions are recorded in [SIMPLIFICATION_CHANGES.md](SIMPLIFICATION_CHANGES.md).
 
 ## 1. Quick Start
 
@@ -57,20 +71,6 @@ The node publishes `control_input_msgs/msg/Inputs` on `/control_input`.
   ```
 
 ![mujoco](.images/mujoco.png)
-
-## Demos
-
-### Terrain estimation
-
-![Terrain estimation](image/1.gif)
-
-### Online gait
-
-![Online gait](image/2.gif)
-
-### Online gait
-
-![Online gait](image/3.gif)
 
 For more details, see [OCS2 Quadruped Controller](controllers/ocs2_quadruped_controller/), [RL Quadruped Controller](controllers/rl_quadruped_controller/), and [BW robot description](descriptions/my_dog/bw_description/).
 
