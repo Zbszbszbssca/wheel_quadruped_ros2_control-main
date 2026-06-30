@@ -2,7 +2,7 @@
 
 This package provides the `ros2_control` hardware interface for Unitree SDK2 transport. It is used for real Unitree robots and for the Unitree Mujoco simulator.
 
-For Mujoco simulation, use [unitree_mujoco](https://github.com/legubiao/unitree_mujoco). This fork expects the Unitree/Mujoco path to provide joint, IMU, and foot-force state interfaces.
+For Mujoco simulation, use [unitree_mujoco](https://github.com/Zbszbszbssca/unitree_mujoco). This fork expects the Unitree/Mujoco path to provide joint, IMU, and foot-force state interfaces.
 
 * [x] **[2025-01-16]** Add odometer states for simulation.
 
@@ -32,8 +32,7 @@ Tested environment:
 
 * Ubuntu 24.04
   * ROS2 Jazzy
-* Ubuntu 22.04
-  * ROS2 Humble
+
 
 ```bash
 cd ~/ros2_ws

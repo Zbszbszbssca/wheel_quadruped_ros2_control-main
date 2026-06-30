@@ -1,4 +1,4 @@
-# Quadruped ROS2 Control
+# Wheel Quadruped ROS2 Control
 
 ## Demos
 
@@ -22,7 +22,7 @@ This repository contains a simplified ros2-control based stack for Unitree quadr
 
 * [Controllers](controllers): OCS2 and RL ros2-control controllers
 * [Commands](commands): joystick command input and shared input message
-* [Descriptions](descriptions): Unitree URDF/Xacro robot models and controller configs
+* [Descriptions](descriptions):  URDF/Xacro robot models and controller configs
 * [Hardwares](hardwares): Unitree SDK2 ros2-control hardware interface
 
 > **Warning:** Default branch was developed under ROS2 Jazzy. For ROS2 Humble, please check out **humble** branch.

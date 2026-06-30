@@ -1,20 +1,16 @@
 # OCS2 Quadruped Controller
 
 This is a ros2-control controller based on [legged_control](https://github.com/qiayuanl/legged_control)
-and [ocs2_ros2](https://github.com/legubiao/ocs2_ros2).
+and [ocs2_ros2](https://github.com/Zbszbszbssca/ocs2_ros2).
 
 Tested environment:
 
 * Ubuntu 24.04
     * ROS2 Jazzy
-* Ubuntu 22.04
-    * ROS2 Humble
-
-* [x] **[2025-01-16]** Add support for ground truth estimator.
-* [x] **[2025-03-15]** OCS2 Controller now can switch between passive and MPC mode.
 
 
-[![](http://i0.hdslb.com/bfs/archive/e758ce019587032449a153cf897a543443b64bba.jpg)](https://www.bilibili.com/video/BV1UcxieuEmH/)
+* [x] **[2026-03-16]** Add support for wheeled robot.
+
 
 ## 1. Interfaces
 
@@ -39,13 +35,13 @@ Required hardware interfaces:
 ## 2. Build
 
 ### 2.1 Build Dependencies
-Before install OCS2 ROS2, please follow the guide to install [Pinocchio](https://stack-of-tasks.github.io/pinocchio/download.html). **Don't use the pinocchio install by rosdep**!
+Before install OCS2 ROS2, please follow the guide to install [Pinocchio](https://stack-of-tasks.github.io/pinocchio/download.html). **you can use sudo apt install ros-jazzy-pinocchio**!，
 
 **After installed Pinocchio**, follow below step to clone ocs2 ros2 library to src folder.
 
 ```bash
 cd ~/ros2_ws/src
-git clone https://github.com/legubiao/ocs2_ros2
+git clone https://github.com/Zbszbszbssca/ocs2_ros2
 
 cd ocs2_ros2
 git submodule update --init --recursive
